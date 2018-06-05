@@ -9,8 +9,6 @@
 
     <script>
 
-
-
         $(document).ready(function (){
 
             $("#abas ul li").addClass("selecionado");
@@ -20,8 +18,17 @@
                 //$(".conteudo").toggle();
 
                 var meuId = $(this).attr("id");
-                $("."+meuId).toggle();
+                $("."+meuId).fadeToggle();
+
             });
+
+            $("p").hide();
+
+            $(".header").click(function () {
+                $(this).parent().find(".descripcion").toggle();
+
+            })
+
         });
 
     </script>
@@ -35,7 +42,7 @@
 
                     foreach ($categorias as $categoria):?>
 
-                    <li id="<?= $categoria->getId(); ?>"><?= $categoria->getNome(); ?></li>
+                    <li id="cat<?= $categoria->getId(); ?>"><?= $categoria->getNome(); ?></li>
 
 
                     <?php endforeach ?>
@@ -46,8 +53,9 @@
 
             <?php foreach ($produtos as $produto):?>
 
-                <div class="<?= $produto->getIdcategoria();?>">
-                    <?= $produto->getNome(); ?>
+                <div class="cat<?= $produto->getIdcategoria();?>">
+                    <h2 class="header"><?= $produto->getNome(); ?></h2>
+                    <p class="descripcion">Descrição: <?= $produto->getDescricao(); ?></p>
                 </div>
 
 
